@@ -1,0 +1,93 @@
+Procedures: A stored Procedure is a collection of sql statements that are stored in database. We can accept parameters and set variables, we can write if statements, loop, etc. within a stored procedures. It is sub program that perform a action.
+
+Syntax:-
+Create [or replace] procedure procedure_name(parameter variable_name datatype) is\as
+begin
+   //code
+end;
+
+
+delimiter /
+create procedure disp_emp()
+begin
+select * from emp;
+end
+/
+
+call disp_emp() /
+
+delimiter /
+create procedure dis_emp()
+begin
+select * from emp order by sal;
+end
+/
+
+call dis_emp() /
+
+create procedure emp()
+begin
+select * from emp where sal=1000;
+end
+/
+
+call emp() /
+
+create procedure find_sal(in s int)
+begin
+select * from emp where sal=s;
+end
+/
+
+call find_sal(1000) /
+
+create procedure name(inout x int)
+begin
+select eid into x from emp where sal=x;
+end
+/
+
+call name(@m)/
+
+select @m/
+
+set @m=1000/
+
+call name(@m)/
+
+select @m
+/
+
+create procedure maxsal(out h int)
+begin
+select max(sal) into h from emp;
+end
+/
+//Week 7
+//loop
+
+Create procedure updatestatus(in mark int)
+begin
+declare mymark int;
+set mymark=mark;
+if mymark>26 
+then
+update student set status='pass' where mark=mymark;
+else
+update student set status='fail' where mark=mymark;
+end if;
+end
+@
+
+call updatestatus(70) 
+@
+
+select * from student
+@
+
+call updatestatus(15)
+@
+ 
+Getting out from the delimiter: delimiter ;
+ 
+
